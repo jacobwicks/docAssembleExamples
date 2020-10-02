@@ -1,0 +1,59 @@
+# declare the list of objects
+---
+objects:
+  - fruit: |
+      DAList.using(
+        object_type=DAObject,
+        complete_attribute='complete')
+---
+# define complete
+code: |
+  fruit[i].fruit
+  fruit[i].color
+  fruit[i].ripe
+  fruit[i].complete = True
+---
+# ask if there are any.
+# Yes will trigger gather()
+question: fruit
+fields:
+  - Got any fruit?: fruit.there_are_any
+    datatype: yesnoradio
+---
+mandatory: True
+code: |
+  if fruit.there_are_any:
+    fruit.gather()
+---
+question: |
+  ${ capitalize(ordinal(i)) } Fruit
+fields:
+  - What kind of fruit?: fruit[i].fruit
+  - What color?: fruit[i].color
+  - How ripe?: fruit[i].ripe
+---
+question: |
+  Got any more fruit?
+yesno: fruit.there_is_another
+---
+field: fruit.revisit
+question: |
+  Edit the fruit
+subquestion: |
+  ${ fruit.table }
+
+  ${ fruit.add_action() }
+---
+table: fruit.table
+rows: fruit
+columns:
+  - Kind: |
+      row_item.fruit
+  - Color: |
+      row_item.color
+  - Ripeness: |
+      row_item.ripe
+edit:
+  - fruit
+  - color
+  - ripe

@@ -1,0 +1,23 @@
+# this file uses the choices that we declared in fruitChoices.yml
+# to give the user predefined options
+
+# include tells documate to find the named file
+# and use all the code from that file in this interview
+include:
+  - fruitChoices.yml
+---
+mandatory: True
+question: Fruit
+fields:
+  - What kind of fruit do you have?: fruit
+  #tell docAssemble to give a dropdown menu for choosing from predefined choices
+  datatype: dropdown
+  # the code line tells docassemble to execute the code that you pass it
+  # here, we tell docAssemble to use the list "fruits"
+  # when docAssemble is given a list for a question that has multiple choices
+  # it will automatically use that list to populate the choices for the question
+  code: fruits
+---
+
+
+

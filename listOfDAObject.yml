@@ -1,0 +1,33 @@
+---
+mandatory: true
+question: |
+  Repeating DAObject
+fields:
+  - Do you have any objects?: myListOfObjects.there_are_any
+    datatype: yesnoradio
+---
+objects:
+  - myListOfObjects: DAList.using(
+      object_type=DAObject,
+      minimum_number=1,
+      complete_attribute='complete')
+---
+code: |
+  myListOfObjects[i].thisCoolField
+  myListOfObjects[i].anotherCoolField
+  myListOfObjects[i].complete = True
+---
+mandatory: True
+code: |
+  if myListOfObjects.there_are_any:
+    myListOfObjects.gather()
+---
+question: |
+  ${ capitalize(ordinal(i)) } Objects Information:
+fields:
+  - Objects can have arbitrary fields?: myListOfObjects[i].thisCoolField
+  - Objects can have more than one field?: myListOfObjects[i].anotherCoolField
+---
+question: |
+  Do you have any other objects?
+yesno: myListOfObjects.there_is_another

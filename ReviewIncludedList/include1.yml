@@ -1,0 +1,21 @@
+objects:
+  - fruit: DAList
+---
+question: fruit
+fields:
+  - Got any fruit?: fruit.there_are_any
+    datatype: yesnoradio
+---
+mandatory: True
+code: |
+  if fruit.there_are_any:
+    fruit.gather()
+---
+question: |
+  ${ capitalize(ordinal(i)) } Fruit
+fields:
+  - What kind of fruit?: fruit[i]
+---
+question: |
+  Got any more fruit?
+yesno: fruit.there_is_another

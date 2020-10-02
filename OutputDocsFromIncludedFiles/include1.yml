@@ -1,0 +1,4 @@
+mandatory: True
+question: fruit
+fields:
+  - What kinda fruit you got?: fruit

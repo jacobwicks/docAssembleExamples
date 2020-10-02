@@ -1,0 +1,36 @@
+objects:
+  - alimony: DAObject
+---
+mandatory: true
+fields:
+  - Will alimony be paid?: alimony.will_be_paid
+    datatype: yesnoradio
+  - When will alimony end?: alimony.end_date
+    datatype: date
+    show if:
+      is: True
+      variable: alimony.will_be_paid
+  - What is the amount of the monthly alimony payment?: alimony.monthly_amount
+    datatype: number
+    show if:
+      is: True
+      variable: alimony.will_be_paid
+  - What is the monthly alimony payment schedule?: alimony.monthly_payment_schedule
+    datatype: text
+    show if:
+      is: True
+      variable: alimony.will_be_paid
+question: Alimony
+---
+field: review_answers
+mandatory: True
+skip undefined: False
+# need:
+#   - hsl_field_3729501888
+question: Please review your answers below. Click the green bubble on the right to change your prior answers.
+review:
+  - note: "####Alimony"
+  - Change Answer: alimony.monthly_amount
+    button: "**What is the amount of the monthly alimony payment?**: ${ alimony.monthly_amount }"
+---
+

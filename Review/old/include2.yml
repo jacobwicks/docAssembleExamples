@@ -1,0 +1,32 @@
+objects:
+  - house: DAObject
+---
+question: House
+mandatory: true
+fields:
+  - Do you have a house?: house.exists
+    datatype: yesnoradio
+  - What color?: house.color
+    show if:
+      is: True
+      variable: house.exists
+  - What Cost?: house.cost
+    datatype: number
+    show if:
+      is: True
+      variable: house.exists
+---
+field: review_answers
+mandatory: True
+skip undefined: False
+# need:
+#   - hsl_field_3729501888
+question: Please review your answers below. Click the green bubble on the right to change your prior answers.
+review:
+  - note: "####House"
+  - Change Answer: house.color
+    button: "**What Color?**: ${ house.color }"
+  - Change Answer: house.cost
+    button: "**What Cost?**: ${ house.cost }"
+---
+

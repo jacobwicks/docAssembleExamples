@@ -1,0 +1,31 @@
+metadata:
+  short title: businessInterest
+  title: businessInterest
+---
+include:
+  - choices50States.yml
+  - choicesMeMySpouseBoth.yml
+---
+mandatory: true
+question: |
+  Business Interests
+fields:
+  - Do you have any business interests?: business_interests.there_are_any
+    datatype: yesnoradio
+---
+objects:
+  - business_interests: DAList
+---
+mandatory: True
+code: |
+  if business_interests.there_are_any:
+    business_interests.gather()
+---
+question: |
+  ${ capitalize(ordinal(i)) } Business Interest Information:
+fields:
+  - Is it interesting?: business_interests[i]
+---
+question: |
+  Do you or your spouse have any other business interests?
+yesno: business_interests.there_is_another

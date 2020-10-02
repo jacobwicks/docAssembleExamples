@@ -1,0 +1,69 @@
+code: multi_user = True
+mandatory: True
+---
+metadata:
+  short title: exampleIncludes
+  title: exampleIncludes
+---
+features:
+  css: "https://hsldocassemble.s3-us-west-1.amazonaws.com/assets/documatecss.css"
+  question back button: True
+---
+modules:
+  - docassemble.base.util
+  - docassemble.numberstowords.numbers_to_words
+  - docassemble.commalist.commalist
+  - docassemble.mathops.math_ops
+---
+include:
+  - include1.yml
+---
+code: |-
+  from documate.base.yaml_functions import load_data_manager_variables
+  load_data_manager_variables(url_args)
+mandatory: True
+---
+code: |-
+  from docassemble.commalist.commalist import reset_global_vars
+  reset_global_vars()
+initial: True
+---
+code: |
+  fruit[i].fruit
+  fruit[i].color
+  fruit[i].ripe
+  fruit[i].complete = True
+---
+mandatory: True
+code: |
+  need(fruit, fruit.table)
+---
+mandatory: True
+question: |
+  Revisit your answers
+review:
+  - note: |
+      % if len(fruit):
+      The fruits are:
+
+      ${ fruit.table }
+
+      ${ fruit.add_action() }
+      % else:
+      There are no fruits.
+
+      ${ fruit.add_action("I would like to add one.") }
+      % endif
+
+continue button field: answers_reviewed
+---
+code: completed_at = current_datetime()
+mandatory: True
+---
+code: |
+  #hslPreAttachment
+---
+allow downloading: True
+attachment code: "[]"
+mandatory: True
+question: Here are your documents!

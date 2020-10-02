@@ -1,0 +1,25 @@
+---
+code: |
+  showChoices = [
+    "Show the next question",
+    "Hide the next question"
+  ]
+---
+question: Questions
+mandatory: true
+fields:
+  - Should I show the next question?: showQuestionAnswer
+    datatype: dropdown
+    code: showChoices
+
+  # compare the answer value to a string literal
+  - This is the next question: nextQuestion
+    js show if: |
+      val("showQuestionAnswer") == "Show the next question"
+
+  # or you can refer directly to the array
+  - This is the other next question: otherQuestion
+    js show if: |
+      val("showQuestionAnswer") == ${ json.dumps(showChoices[0]) }
+---
+

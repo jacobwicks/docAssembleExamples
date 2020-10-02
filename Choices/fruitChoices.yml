@@ -1,0 +1,16 @@
+# this file defines one python "list"
+# called an array in most programming languages
+# each item in the list is a string
+
+# code: followed by the pipe symbol tells docAssemble that 
+# This is python code
+# and it continues on the lines below
+code: |
+# fruits is the name of the python variable
+# = is the assignment operator
+# [ starts the list, ] ends it
+  fruits = [
+    "Apple", 
+    "Banana",
+    "Cherry"
+    ]

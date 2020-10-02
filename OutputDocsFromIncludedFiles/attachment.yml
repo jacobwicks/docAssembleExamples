@@ -1,0 +1,13 @@
+code: |
+  #hslPreAttachment
+---
+attachment:
+  docx template file: output.docx
+  filename: output
+  name: output
+  variable name: output
+---
+allow downloading: True
+attachment code: "[output]"
+mandatory: True
+question: Here are your documents!

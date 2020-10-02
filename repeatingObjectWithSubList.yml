@@ -1,0 +1,114 @@
+metadata:
+  short title: businessInterest
+  title: businessInterest
+---
+include:
+  - choices50States.yml
+  - choicesMeMySpouseBoth.yml
+---
+objects:
+  - business_interests: DAList.using(
+      object_type=Person,
+      minimum_number=1,
+      complete_attribute='complete')
+  - business_interests[i].other_owners: |
+      DAList.using(
+        object_type=Individual,
+        complete_attribute='complete')
+---
+code: |
+  business_interests[i].address.address
+  business_interests[i].address.unit
+  business_interests[i].address.city
+  business_interests[i].address.state
+  business_interests[i].address.zip
+  business_interests[i].current_value
+  business_interests[i].name
+  business_interests[i].percent_owned_petitioner
+  business_interests[i].percent_owned_respondent
+  business_interests[i].should_be_divided
+  business_interests[i].type
+  business_interests[i].other_owners.there_are_any
+  business_interests[i].other_owners.gather()
+  business_interests[i].complete = True
+---
+code: |
+  business_interests[i].other_owners[j].name.first
+  business_interests[i].other_owners[j].name.middle
+  business_interests[i].other_owners[j].name.last
+  business_interests[i].other_owners[j].address.address
+  business_interests[i].other_owners[j].address.unit
+  business_interests[i].other_owners[j].address.city
+  business_interests[i].other_owners[j].address.state
+  business_interests[i].other_owners[j].address.zip
+  business_interests[i].other_owners[j].telephone
+  business_interests[i].other_owners[j].email
+  business_interests[i].other_owners[j].complete = True
+---
+mandatory: true
+question: |
+  Business Interests
+fields:
+  - Do you or your spouse have any business interests?: business_interests.there_are_any
+    datatype: yesnoradio
+---
+mandatory: True
+code: |
+  if business_interests.there_are_any:
+    business_interests.gather()
+---
+question: |
+  ${ capitalize(ordinal(i)) } Business Interest Information:
+fields:
+  - What type of business is it?: business_interests[i].type
+  - Business Name: business_interests[i].name
+  - Street Address: business_interests[i].address.address
+  - Address 2 (unit number): business_interests[i].address.unit
+  - City: business_interests[i].address.city
+  - State: business_interests[i].address.state
+    datatype: dropdown
+    code: choices50States
+  - Zip Code: business_interests[i].address.zip
+  - Current Value: business_interests[i].current_value
+    datatype: number
+  - What percentage of the business do you own?: business_interests[i].percent_owned_petitioner
+    datatype: number
+  - What percentage of the business does your spouse own?: business_interests[i].percent_owned_respondent
+    datatype: number
+  - Should this business interest be divided?: business_interests[i].should_be_divided
+    datatype: yesnoradio
+  - How should this business interest be divided?: business_interests[i].divided_how
+    show if:
+      is: True
+      variable: business_interests[i].should_be_divided
+---
+mandatory: True
+question: Does ${ business_interests[i] } have a/any other owner(s)?
+yesno: business_interests[i].other_owners.there_are_any
+---
+question: |
+  Who is the ${ ordinal(i) } ${ ordinal(j) } other owner?
+fields:
+  - First Name: business_interests[i].other_owners[j].name.first
+  - Middle Name: business_interests[i].other_owners[j].name.middle
+    required: false
+  - Last Name: business_interests[i].other_owners[j].name.last
+  - Street Address: business_interests[i].other_owners[j].address.address
+  - Address 2 (apartment or unit number): business_interests[i].other_owners[j].address.unit
+  - City: business_interests[i].other_owners[j].address.city
+  - State: business_interests[i].other_owners[j].address.state
+    datatype: dropdown
+    code: choices50States
+  - Zip Code: business_interests[i].other_owners[j].address.zip
+  - Telephone: business_interests[i].other_owners[j].telephone
+    required: false
+  - Email: business_interests[i].other_owners[j].email
+    required: false
+---
+question: |
+  Does ${ business_interests[i] } have any other owners?
+yesno: business_interests[i].other_owners.there_is_another
+---
+question: |
+  Do you or your spouse have any other business interests?
+yesno: business_interests.there_is_another

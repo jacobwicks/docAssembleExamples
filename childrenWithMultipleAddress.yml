@@ -1,0 +1,72 @@
+# Example repeating list
+# With sub list
+include:
+  - choices50States.yml
+---
+objects:
+  - child: |
+      DAList.using(
+        object_type=Person,
+        complete_attribute='complete')
+  - child[i].past_address: |
+      DAList.using(
+        object_type=Address,
+        complete_attribute='complete')
+---
+# Define complete condition for Child object
+code: |
+  child[i].name.first
+  child[i].past_address.there_are_any
+  child[i].past_address.gather()
+  child[i].complete = True
+---
+# Complete past address
+code: |
+  child[i].past_address[j].address
+  child[i].past_address[j].complete = True
+---
+# Mandatory- ask question to set there_are_any
+mandatory: true
+question: |
+  Children
+fields:
+  - Do you and your spouse have any children?: child.there_are_any
+    datatype: yesnoradio
+---
+# Gather children
+# Triggered if there are any
+mandatory: True
+code: |
+  if child.there_are_any:
+    child.gather()
+---
+# Need to cover each variable that is listed
+# in the complete condition definition
+question: |
+  ${ capitalize(ordinal(i)) } Child
+fields:
+  - Name: child[i].name.first
+---
+# set past_address.there_are_any
+# will be asked because it is part of completing the child object
+question: Does this child have a/any past_address(s)?
+yesno: child[i].past_address.there_are_any
+---
+# Need to cover each variable listed
+# in the complete condition for past_address
+question: |
+  ${ capitalize(ordinal(j)) } Past Address
+fields:
+  - Address: child[i].past_address[j].address
+---
+# Set past_address.there_is_another
+# true will trigger loop
+question: |
+  Does this child have any other past_addresss?
+yesno: child[i].past_address.there_is_another
+---
+# set child.there_is_another
+# true will trigger loop
+question: |
+  Do you or your spouse have any other children?
+yesno: child.there_is_another

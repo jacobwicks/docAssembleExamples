@@ -1,0 +1,9 @@
+mandatory: True
+question: |
+  Revisit your answers
+review:
+  - Revisit fruit: fruit
+    button: |
+      You said  fruit was
+      ${ fruit }.
+continue button field: answers_reviewed
