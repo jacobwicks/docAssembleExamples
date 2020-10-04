@@ -1,0 +1,55 @@
+# Review an included file
+# Included file has a nested list
+# List of Fruit Objects
+# each Fruit contains a list of Recipe Objects
+include:
+  - include1.yml
+---
+# Define complete fruit
+code: |
+  fruit[i].fruit
+  fruit[i].color
+  fruit[i].ripe
+  # tell it to gather the recipes
+  # before considering fruit to be complete 
+  fruit[i].recipe.gather()
+  fruit[i].complete = True
+---
+# Define complete recipe
+code: |
+  fruit[i].recipe[j].name
+  fruit[i].recipe[j].type
+  fruit[i].recipe[j].prep_time
+  fruit[i].recipe[j].complete = True
+---
+mandatory: True
+# tell docAssemble it needs fruit
+# and fruit.table to display review
+code: |
+  need(fruit, fruit.table)
+---
+# define the review screen
+mandatory: True
+question: |
+  Revisit your answers
+review:
+  # loop through fruit, display table for each
+  - note: |
+      % if len(fruit):
+      The fruits are:
+
+      ${ fruit.table }
+
+      ${ fruit.add_action() }
+      % else:
+      There are no fruits.
+
+      ${ fruit.add_action("I would like to add one.") }
+      % endif
+
+continue button field: answers_reviewed
+---
+allow downloading: True
+attachment code: "[]"
+mandatory: True
+question: Here are your documents!
