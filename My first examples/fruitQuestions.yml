@@ -1,0 +1,12 @@
+include:
+  - fruitChoices.yml
+---
+question: Fruit Bowl
+fields:
+  - What kind of fruit do you have?: fruit
+    datatype: dropdown
+    code: fruits
+---
+question: Toppings Bar
+fields:
+  - What kind of topping do you like on your fruit?: topping

@@ -1,0 +1,8 @@
+field: review_answers
+question: Please review your answers below. Click the green bubble on the right to change your prior answers.
+review:
+  - Change Answer: fruit
+    button: "**What kind of fruit do you have?**: ${ fruit }"
+  - Change Answer: topping
+    button: "**What kind of topping do you like on your fruit?**: ${ topping }"
+skip undefined: False

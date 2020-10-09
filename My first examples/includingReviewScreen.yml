@@ -1,0 +1,11 @@
+include:
+  - fruitQuestions.yml
+  - fruitReviewScreen.yml
+---
+allow downloading: True
+attachment code: "[]"
+event: final_screen
+mandatory: True
+need:
+  - review_answers
+question: Here are your documents!
