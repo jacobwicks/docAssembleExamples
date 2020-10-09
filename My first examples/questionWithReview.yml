@@ -1,0 +1,11 @@
+mandatory: true
+question: Fruit Bowl
+fields:
+  - What kind of fruit do you have?: fruit
+---
+field: review_answers
+mandatory: True
+question: Please review your answers below. Click the green bubble on the right to change your prior answers.
+review:
+  - Change Answer: fruit
+    button: "**What kind of fruit do you have?**: ${ fruit }"

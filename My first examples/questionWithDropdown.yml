@@ -1,0 +1,19 @@
+# fruits is the name of the python variable
+# = is the assignment operator
+# [ starts the list, ] ends it
+code: |
+  fruits = [
+   "Apple", 
+   "Banana",
+   "Cherry" ]
+---
+question: Fruit Bowl
+fields:
+  - What kind of fruit do you have?: fruit
+    datatype: dropdown
+    code: fruits
+---
+mandatory: True
+question: Goodbye. Enjoy your ${ fruit }
+buttons:
+  - I'm done: exit

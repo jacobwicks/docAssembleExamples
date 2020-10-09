@@ -95,6 +95,9 @@ columns:
       row_item.ripe
   - Recipes: |
       len(row_item.recipe)
+# need to edit at least one variable on each screen you want the user to see
+# so, fruit, color, or ripe would work on their own
+# need to call out recipe_review separately because it's on its own screen
 edit:
   - fruit
   - color

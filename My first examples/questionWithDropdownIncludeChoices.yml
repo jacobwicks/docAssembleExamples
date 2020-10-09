@@ -1,0 +1,13 @@
+include:
+  - fruitChoices.yml
+---
+question: Fruit Bowl
+fields:
+  - What kind of fruit do you have?: fruit
+    datatype: dropdown
+    code: fruits
+---
+mandatory: True
+question: Goodbye. Enjoy your ${ fruit }
+buttons:
+  - I'm done: exit

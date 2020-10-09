@@ -1,0 +1,18 @@
+question: Fruit Bowl
+fields:
+  - What kind of fruit do you have?: fruit
+---
+field: review_answers
+question: Please review your answers below. Click the green bubble on the right to change your prior answers.
+review:
+  - Change Answer: fruit
+    button: "**What kind of fruit do you have?**: ${ fruit }"
+---
+allow downloading: True
+attachment code: "[]"
+event: final_screen
+mandatory: True
+need:
+  - fruit
+  - review_answers
+question: Here are your documents!

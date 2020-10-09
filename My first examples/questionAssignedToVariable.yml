@@ -1,0 +1,4 @@
+mandatory: true
+question: Fruit Bowl
+fields:
+  - What kind of fruit do you have?: fruit

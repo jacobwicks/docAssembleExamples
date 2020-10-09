@@ -1,0 +1,23 @@
+question: Fruit Bowl
+fields:
+  - What kind of fruit do you have?: fruit
+---
+field: review_answers
+question: Please review your answers below. Click the green bubble on the right to change your prior answers.
+review:
+  - Change Answer: fruit
+    button: "**What kind of fruit do you have?**: ${ fruit }"
+---
+attachment:
+  docx template file: fruit_template.docx
+  filename: your_fruit
+  variable name: fruit_output
+---
+allow downloading: True
+attachment code: "[fruit_output]"
+event: final_screen
+mandatory: True
+need:
+  - fruit
+  - review_answers
+question: Here are your documents!

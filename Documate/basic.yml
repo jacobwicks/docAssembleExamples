@@ -1,0 +1,52 @@
+code: multi_user = True
+mandatory: True
+---
+metadata:
+  short title: An Example Workflow
+  title: An Example Workflow
+---
+features:
+  css: "https://hsldocassemble.s3-us-west-1.amazonaws.com/assets/documatecss.css"
+  question back button: True
+---
+modules:
+  - docassemble.base.util
+  - docassemble.numberstowords.numbers_to_words
+  - docassemble.commalist.commalist
+  - docassemble.mathops.math_ops
+---
+code: |-
+  from documate.base.yaml_functions import load_data_manager_variables
+  load_data_manager_variables(url_args)
+mandatory: True
+---
+code: |-
+  from docassemble.commalist.commalist import reset_global_vars
+  reset_global_vars()
+initial: True
+---
+fields:
+  - What's your name?: your_name
+    datatype: text
+question: New Page
+---
+field: review_answers
+question: Please review your answers below. Click the green bubble on the right to change your prior answers.
+review:
+  - note: "####New Page"
+  - Change Answer: your_name
+    button: "**What's your name?**: ${ your_name }"
+---
+code: completed_at = current_datetime()
+---
+code: |
+  #hslPreAttachment
+---
+allow downloading: True
+attachment code: "[]"
+event: final_screen
+mandatory: True
+need:
+  - your_name
+  - review_answers
+question: Here are your documents!
